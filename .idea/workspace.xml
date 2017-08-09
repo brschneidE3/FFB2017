@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cc9c3ae-8ff7-4965-b611-d0f14bd80a00" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LeagueClass.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PlayerClass.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/constants.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/helpers.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scraping_explore/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scraping_explore/auth.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/auth.json" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/create_metadata_files.py" afterPath="$PROJECT_DIR$/scraping_explore/create_metadata_files.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/draft_results.csv" afterPath="$PROJECT_DIR$/scraping_explore/draft_results.csv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/explore.py" afterPath="$PROJECT_DIR$/scraping_explore/explore.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/player_ids.csv" afterPath="$PROJECT_DIR$/scraping_explore/player_ids.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/FFB2017.iml" afterPath="$PROJECT_DIR$/.idea/FFB2017.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <ignored path="FFB2017.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,8 +26,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+            <state relative-caret-position="872">
+              <caret line="135" column="26" lean-forward="false" selection-start-line="135" selection-start-column="26" selection-end-line="135" selection-end-column="26" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -122,9 +107,9 @@
       <find>O. Beckham Jr.;NYG</find>
       <find>2249.550375</find>
       <find>`</find>
-      <find>sleeper_roster</find>
       <find>D. Johnson;Ari - RB</find>
       <find>D. John</find>
+      <find>sleeper_roster</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -144,6 +129,7 @@
         <option value="$PROJECT_DIR$/helpers.py" />
         <option value="$PROJECT_DIR$/LeagueClass.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -521,16 +507,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/LeagueClass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PlayerClass.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
@@ -909,10 +885,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+        <state relative-caret-position="872">
+          <caret line="135" column="26" lean-forward="false" selection-start-line="135" selection-start-column="26" selection-end-line="135" selection-end-column="26" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>

@@ -96,26 +96,26 @@ def evaluate_next_pick(i, print_team=False):
 
 if __name__ == '__main__':
 
-    # Solve for players to draft
-    sleeper_roster = None
-
+    # Break up optimization across 8 processors
     parallel_start = time.time()
     pool = Pool(processes=8)
-
     values = list(pool.imap(evaluate_next_pick, range(len(available_players))))
     pool.close()
     pool.join()
 
+    # Save results
     parallel_results = {}
     for i in range(len(available_players)):
         player_id = available_players[i]
         value = values[i]
         parallel_results[player_id] = value
 
+    # Find base solution
     min_nonzero_value = min(result for result in parallel_results.values() if result > 0)
     min_nonzero_index = values.index(min_nonzero_value)
     min_nonzero_player = available_players[min_nonzero_index]
 
+    # Print results
     sorted_values_by_player = sorted(parallel_results.items(), key=operator.itemgetter(1), reverse=True)
     value_table = []
     for i in range(len(sorted_values_by_player)):
@@ -129,12 +129,11 @@ if __name__ == '__main__':
 
     print tabulate.tabulate(value_table, ['Player', 'Value', 'd_Value']), '\n'
 
+    # Print base solution
     print '\n######################################## SLEEPER ROSTER ########################################'
     model_result = evaluate_next_pick(min_nonzero_index, print_team=True)
-    # print '\t min value: %s' % min_nonzero_value
-    # print '\t min index: %s' % min_nonzero_index
-    # print '\t min player: %s' % min_nonzero_player
 
+    # Report on solve time
     parallel_end = time.time()
     elapsed = parallel_end - parallel_start
     print '\noptimal draft solve time: %s' % elapsed
