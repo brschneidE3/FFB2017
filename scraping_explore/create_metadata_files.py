@@ -6,7 +6,6 @@ import csv
 from YHandler import YHandler, YQuery
 handler = YHandler()
 query = YQuery(handler, 'nfl')
-league_no = "427623"
 
 # Look up leagues so far
 league_keys = {}  # Gives season given league
