@@ -1,34 +1,41 @@
 import helpers
 import LeagueClass
-import time
-from multiprocessing import Pool
-import operator
-import tabulate
-from coopr import pyomo
+
+if __name__ == '__main__':
+    import operator
+    import tabulate
+    import time
+    from multiprocessing import Pool
 
 ################### Input parameters ###################
 # set draft pick
-pick_no = 1
+pick_no = 7
 num_teams = 14
-num_rounds = 17
+num_rounds = 17 + 1
 
 # Track players drafted so far -- ONLY THING THAT SHOULD BE UPDATED
 my_drafted_players = \
     []
 other_drafted_players = \
-    []
+    [0, 1, 2, 3, 4, 5]
+
 ########################################################
 
 # Load projection data
 players = helpers.create_players()
+# helpers.calc_avg_pick(players)
+# exit()
 helpers.add_avg_picks(players)
-available_players = [key for key in players.keys()]
+available_players = [key for key in players.keys() if 'Untracked' not in key]
+available_players += [key for key in players.keys() if 'Untracked' in key]
+
 if __name__ == '__main__':
     # Print indices of players available to start
     for i in range(len(available_players)):
         player_id = available_players[i]
         print '%s) %s' % (i, player_id)
     print '\n'
+
 
 # Create league
 league = LeagueClass.League(num_teams=num_teams, num_rounds=num_rounds, players=players)
@@ -37,6 +44,13 @@ league = LeagueClass.League(num_teams=num_teams, num_rounds=num_rounds, players=
 team_playerids = [available_players[i] for i in my_drafted_players]
 other_playerids = [available_players[i] for i in other_drafted_players]
 drafted_players = team_playerids + other_playerids
+pos_taken = {}
+for playerid in drafted_players:
+    player = players[playerid]
+    try:
+        pos_taken[player.position] += 1
+    except KeyError:
+        pos_taken[player.position] = 1
 
 # Calculate what next pick would be overall
 num_drafted = len(drafted_players)
@@ -63,7 +77,8 @@ prob_avail_after = {}
 for player_id in available_players:
     player = players[player_id]
     player_avg_pick = player.avg_pick
-    p_avail = helpers.get_prob_avail_after(players_drafted_between_picks, player_avg_pick, num_drafted, width=1.5)
+    p_avail = helpers.get_prob_avail_after(players_drafted_between_picks, player_avg_pick, num_drafted, pos_taken,
+                                           width=1.)
     prob_avail_after[player] = p_avail
 
 def evaluate_next_pick(i, print_team=False):
@@ -73,7 +88,7 @@ def evaluate_next_pick(i, print_team=False):
     if prob_avail_after[player] < 1.:
         # Add player to team, and remove from available pool
         team_with_player = team_playerids + [player_id]
-        avail_players_without_player = [p for p in available_players if p != player_id]
+        avail_players_without_player = [p for p in available_players if p != player_id and 'Untracked' not in p]
 
         # Create model
         model_w_player = \
@@ -88,7 +103,6 @@ def evaluate_next_pick(i, print_team=False):
 
         if print_team:
             league.print_position_weeks_by_undrafted_player(solved_opt_w_player)
-
     else:
         value = 0
 
@@ -137,3 +151,4 @@ if __name__ == '__main__':
     parallel_end = time.time()
     elapsed = parallel_end - parallel_start
     print '\noptimal draft solve time: %s' % elapsed
+    print 'next pick: %s' % (num_drafted + 1)

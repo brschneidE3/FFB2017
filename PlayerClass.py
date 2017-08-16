@@ -26,15 +26,18 @@ class Player:
             position_string = parse_for_positions[1]
             positions = position_string.rsplit(',')
             if len(positions) > 1:
-                print 'Multiple positions found for %s' % self.id
-                exit()
+                print 'Multiple positions found for %s\n' % self.id
+
+                if position_string == 'RB,TE':
+                    return 'TE'
+
             else:
                 position = positions[0]
                 if position in ['QB', 'RB', 'WR', 'TE', 'K', 'DEF']:
                     return position
                 elif position in ['S', 'CB']:
                     return 'DB'
-                elif position in ['LB', 'DE', 'DL']:
+                elif position in ['LB', 'DE', 'DL', 'DT']:
                     return 'D'
                 else:
                     print 'Unidentified position for: %s' % self.id

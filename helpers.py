@@ -1,6 +1,15 @@
 import csv
 import PlayerClass
 from coopr import pyomo
+import constants
+import operator
+
+def is_numeric(n):
+    try:
+        float(n)
+        return True
+    except:
+        return False
 
 def get_team_picks(num_teams, pick_no, num_rounds):
     picks = []
@@ -16,6 +25,16 @@ def get_team_picks(num_teams, pick_no, num_rounds):
     return picks
 
 def create_players():
+    # TODO: reduce to:
+        # 32 QBs
+        # 50 RBs
+        # 75 WRs
+        # 25 TE
+        # 32 K
+        # 32 DEF
+        # 50 D
+        # 25 DB
+
     players = {}
     with open('points.csv', 'rb') as csv_file:
         reader = csv.reader(csv_file)
@@ -27,7 +46,10 @@ def create_players():
                 pass
             else:
                 player_id = row[0].replace('\xa0', ';')
-                points = {i-1: float(row[i]) for i in range(2, 18)}
+                try:
+                    points = {i-1: float(row[i]) for i in range(2, 18)}
+                except ValueError:
+                    points = {i - 1: 0 for i in range(2, 18)}
 
                 player = PlayerClass.Player(player_id)
                 player.add_points(points)
@@ -36,7 +58,7 @@ def create_players():
 
 
 def add_avg_picks(players):
-    with open('avg pick.csv', 'rb') as csv_file:
+    with open('avg pick-calced.csv', 'rb') as csv_file:
         reader = csv.reader(csv_file)
         first_row = True
 
@@ -63,7 +85,7 @@ def print_players_to_draft(solved_opt, prob_avail):
     for player in ps_to_draft:
         print '\t %s, p=%s' % (player.id, str(prob_avail[player])[:5])
 
-def get_prob_avail_after(players_drafted_between_picks, player_avg_pick, num_drafted, width=1.5):
+def get_prob_avail_after(players_drafted_between_picks, player_avg_pick, num_drafted, pos_taken, width=1.5):
 
     threshold = width*players_drafted_between_picks
     avg_pick_upper_bound = num_drafted + threshold
@@ -86,3 +108,43 @@ def get_prob_avail_after(players_drafted_between_picks, player_avg_pick, num_dra
             print 'Error calculating p_avail'
             exit()
         return p_avail
+
+def calc_avg_pick(players):
+
+    avg_pick_by_rank = {position: {} for position in constants.ordered_positions if position != 'B'}
+    with open('avg_pick_by_rank.csv', 'rb') as avgpick_file:
+        reader = csv.reader(avgpick_file)
+        first_row = True
+
+        for row in reader:
+            if first_row:
+                positions = row[1:]
+                first_row = False
+            else:
+                rank = int(row[0])
+                for j in range(len(positions)):
+                    position = positions[j]
+                    value = float(row[j + 1]) if is_numeric(row[j+1]) else 1000
+                    avg_pick_by_rank[position][rank] = value
+
+    players_by_pos = {position: [] for position in constants.ordered_positions if position != 'B'}
+    for player in players.values():
+        position = player.position
+        players_by_pos[position].append((player.total_points, player.id))
+
+    player_avg_pick = {}
+    for position in players_by_pos.keys():
+        sorted_positions = sorted(players_by_pos[position], key=operator.itemgetter(0), reverse=True)
+
+        for i in range(len(sorted_positions)):
+            total_points, player_id = sorted_positions[i]
+            rank = i + 1
+            avg_pick = avg_pick_by_rank[position][rank]
+            player_avg_pick[player_id] = avg_pick
+
+    with open('avg pick-calced.csv', 'wb') as avgpick_output:
+        writer = csv.writer(avgpick_output)
+        writer.writerow(['Player', 'Avg Pick'])
+
+        for player_id in player_avg_pick.keys():
+            writer.writerow([player_id, player_avg_pick[player_id]])
