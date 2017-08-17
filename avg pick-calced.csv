@@ -1,10 +1,10 @@
 Player,Avg Pick
-D. Johnson;Ari - RB,3
+D. Johnson;Ari - RB,5
 J. Jones;Atl - WR,3.333333333
-L. Bell;Pit - RB,5
-A. Brown;Pit - WR,5.666666667
+L. Bell;Pit - RB,6
 R. Gronkowski;NE - TE,5.666666667
-D. Freeman;Atl - RB,6
+A. Brown;Pit - WR,5.666666667
+D. Freeman;Atl - RB,3
 O. Beckham Jr.;NYG - WR,7
 M. Gordon;LAC - RB,7.666666667
 D. Murray;Ten - RB,10
@@ -50,8 +50,8 @@ A. Robinson;Jax - WR,50
 Atlanta;Atl - DEF,50.66666667
 I. Crowell;Cle - RB,52.33333333
 Luke Kuechly;Car - LB,52.66666667
-J. Landry;Mia - WR,53.66666667
 P. Perkins;NYG - RB,53.66666667
+J. Landry;Mia - WR,53.66666667
 G. Olsen;Car - TE,54.66666667
 A. Luck;Ind - QB,55.66666667
 K. Benjamin;Car - WR,56.66666667
@@ -63,8 +63,8 @@ K. Cousins;Was - QB,61.33333333
 D. Adams;GB - WR,61.66666667
 T. Kelce;KC - TE,62.66666667
 Arizona;Ari - DEF,63.66666667
-J. Mixon;Cin - RB,65.66666667
 T. Lockett;Sea - WR,65.66666667
+J. Mixon;Cin - RB,65.66666667
 Washington;Was - DEF,66.66666667
 T. Coleman;Atl - RB,67.33333333
 D. Prescott;Dal - QB,68
@@ -78,9 +78,9 @@ Jalen Collins;Atl - CB,76.66666667
 M. Bennett;GB - TE,77
 J. Crowder;Was - WR,78
 D. Moncrief;Ind - WR,81.66666667
-C. Anderson;Den - RB,83.33333333
 M. Stafford;Det - QB,83.33333333
 Telvin Smith;Jax - LB,83.33333333
+C. Anderson;Den - RB,83.33333333
 M. Wallace;Bal - WR,87.66666667
 Lavonte David;TB - LB,88.33333333
 Pittsburgh;Pit - DEF,88.33333333
@@ -143,8 +143,8 @@ D. Sproles;Phi - RB,140.6666667
 Jatavis Brown;LAC - LB,141
 E. Decker;Ten - WR,143.3333333
 Justin Tucker;Bal - K,143.6666667
-J. Thomas;Mia - TE,144.6666667
 R. Woods;LAR - WR,144.6666667
+J. Thomas;Mia - TE,144.6666667
 L. Murray;Min - RB,148
 M. Lee;Jax - WR,148
 J.J. Watt;Hou - DE,149.6666667
@@ -169,8 +169,8 @@ T. Gabriel;Atl - WR,170
 D. Henry;Ten - RB,170.3333333
 Tyrann Mathieu;Ari - S,171
 C. Beasley;Dal - WR,174
-G. Bernard;Cin - RB,175
 J. Winston;TB - QB,175
+G. Bernard;Cin - RB,175
 Christian Kirksey;Cle - LB,175.3333333
 Dan Bailey;Dal - K,176
 T. Ginn Jr.;NO - WR,177.3333333
@@ -202,8 +202,8 @@ Philadelphia;Phi - DEF,198.3333333
 K. White;Chi - WR,198.6666667
 C. Davis;Ten - WR,202.6666667
 R. Turbin;Ind - RB,203.6666667
-B. LaFell;Cin - WR,205
 Matt Bryant;Atl - K,205
+B. LaFell;Cin - WR,205
 C. Fleener;NO - TE,206.3333333
 Mason Crosby;GB - K,207
 E. Ebron;Det - TE,210
@@ -216,27 +216,26 @@ Kam Chancellor;Sea - S,215.3333333
 Deone Bucannon;Ari - LB,215.6666667
 Karl Joseph;Oak - S,216
 Stephen Gostkowski;NE - K,216.6666667
-C. Brate;TB - TE,217
 J. James;Pit - TE,217
+C. Brate;TB - TE,217
 Tony Jefferson;Bal - S,218
-Avery Williamson;Ten - LB,218.3333333
 J. Williams;GB - RB,218.3333333
+Avery Williamson;Ten - LB,218.3333333
 FakeRB4 - RB,219
 T. Smith;Phi - WR,219
 Jordan Hicks;Phi - LB,220.5
-Blair Walsh;Sea - K,222
 E. Manning;NYG - QB,222
+Blair Walsh;Sea - K,222
 Wil Lutz;NO - K,223.3333333
 FakeRB2 - RB,224
-Eric Weddle;Bal - S,224.5
 M. Williams;LAC - WR,224.5
+Eric Weddle;Bal - S,224.5
 FakeRB3 - RB,225
 A. Hurns;Jax - WR,225.3333333
 M. Wheaton;Chi - WR,226.5
 Byron Jones;Dal - S,227
 K.J. Wright;Sea - LB,227
 Kai Forbath;Min - K,228.6666667
-T. Williams;Dal - WR,229
 FakeRB1 - RB,229.5
 C. Wentz;Phi - QB,232
 P. Rivers;LAC - QB,232
@@ -245,78 +244,78 @@ Jake Elliott;Cin - K,233.3333333
 B. Bortles;Jax - QB,235
 Brandon McManus;Den - K,235.6666667
 A. Smith;KC - QB,237
-B. Hoyer;SF - QB,1000
-Baltimore;Bal - DEF,1000
-Buffalo;Buf - DEF,1000
-C. Kessler;Cle - QB,1000
-C. Palmer;Ari - QB,1000
-Chicago;Chi - DEF,1000
-Cincinnati;Cin - DEF,1000
-Cleveland;Cle - DEF,1000
-D. Watson;Hou - QB,1000
-Dallas;Dal - DEF,1000
-Detroit;Det - DEF,1000
-Indianapolis;Ind - DEF,1000
-J. Cutler;Mia - QB,1000
-J. Goff;LAR - QB,1000
-J. McCown;NYJ - QB,1000
-Jacksonville;Jax - DEF,1000
-Los Angeles;LAC - DEF,1000
-Los Angeles;LAR - DEF,1000
-M. Glennon;Chi - QB,1000
-New Orleans;NO - DEF,1000
-New York;NYJ - DEF,1000
-Oakland;Oak - DEF,1000
-San Francisco;SF - DEF,1000
-T. Siemian;Den - QB,1000
-Tennessee;Ten - DEF,1000
-Untracked1 NE - QB,1000
-Untracked10 NE - QB,1000
-Untracked11 NE - QB,1000
-Untracked12 NE - QB,1000
-Untracked13 NE - QB,1000
-Untracked14 NE - QB,1000
-Untracked15 NE - QB,1000
-Untracked16 NE - QB,1000
-Untracked17 NE - QB,1000
-Untracked18 NE - QB,1000
-Untracked19 NE - QB,1000
-Untracked2 NE - QB,1000
 Untracked20 NE - QB,1000
 Untracked21 NE - QB,1000
-Untracked22 NE - QB,1000
-Untracked23 NE - QB,1000
-Untracked24 NE - QB,1000
-Untracked25 NE - QB,1000
-Untracked26 NE - QB,1000
+J. McCown;NYJ - QB,1000
+B. Hoyer;SF - QB,1000
 Untracked27 NE - QB,1000
-Untracked28 NE - QB,1000
-Untracked29 NE - QB,1000
-Untracked3 NE - QB,1000
-Untracked30 NE - QB,1000
-Untracked31 NE - QB,1000
-Untracked32 NE - QB,1000
-Untracked33 NE - QB,1000
-Untracked34 NE - QB,1000
-Untracked35 NE - QB,1000
-Untracked36 NE - QB,1000
-Untracked37 NE - QB,1000
-Untracked38 NE - QB,1000
 Untracked39 NE - QB,1000
 Untracked4 NE - QB,1000
+Untracked38 NE - QB,1000
+Los Angeles;LAC - DEF,1000
+Buffalo;Buf - DEF,1000
+Untracked3 NE - QB,1000
+New Orleans;NO - DEF,1000
+Baltimore;Bal - DEF,1000
+Untracked28 NE - QB,1000
 Untracked40 NE - QB,1000
-Untracked41 NE - QB,1000
-Untracked42 NE - QB,1000
-Untracked43 NE - QB,1000
-Untracked44 NE - QB,1000
+Untracked10 NE - QB,1000
+Untracked12 NE - QB,1000
+C. Palmer;Ari - QB,1000
+Oakland;Oak - DEF,1000
+Untracked30 NE - QB,1000
 Untracked45 NE - QB,1000
-Untracked46 NE - QB,1000
-Untracked47 NE - QB,1000
-Untracked48 NE - QB,1000
-Untracked49 NE - QB,1000
-Untracked5 NE - QB,1000
 Untracked50 NE - QB,1000
-Untracked6 NE - QB,1000
-Untracked7 NE - QB,1000
-Untracked8 NE - QB,1000
+Tennessee;Ten - DEF,1000
 Untracked9 NE - QB,1000
+Untracked43 NE - QB,1000
+Untracked41 NE - QB,1000
+Untracked48 NE - QB,1000
+J. Cutler;Mia - QB,1000
+Untracked35 NE - QB,1000
+Untracked5 NE - QB,1000
+Untracked44 NE - QB,1000
+J. Goff;LAR - QB,1000
+Untracked1 NE - QB,1000
+T. Siemian;Den - QB,1000
+Untracked29 NE - QB,1000
+Untracked26 NE - QB,1000
+Untracked2 NE - QB,1000
+Untracked32 NE - QB,1000
+Untracked16 NE - QB,1000
+Untracked18 NE - QB,1000
+Untracked31 NE - QB,1000
+Untracked47 NE - QB,1000
+D. Watson;Hou - QB,1000
+New York;NYJ - DEF,1000
+Untracked25 NE - QB,1000
+Untracked46 NE - QB,1000
+Untracked19 NE - QB,1000
+Indianapolis;Ind - DEF,1000
+Untracked13 NE - QB,1000
+Untracked7 NE - QB,1000
+Chicago;Chi - DEF,1000
+Untracked22 NE - QB,1000
+C. Kessler;Cle - QB,1000
+Untracked14 NE - QB,1000
+Untracked37 NE - QB,1000
+Untracked8 NE - QB,1000
+Cincinnati;Cin - DEF,1000
+Untracked33 NE - QB,1000
+Untracked6 NE - QB,1000
+Cleveland;Cle - DEF,1000
+Untracked17 NE - QB,1000
+M. Glennon;Chi - QB,1000
+Untracked42 NE - QB,1000
+Detroit;Det - DEF,1000
+Untracked24 NE - QB,1000
+Jacksonville;Jax - DEF,1000
+Untracked23 NE - QB,1000
+Untracked49 NE - QB,1000
+Untracked11 NE - QB,1000
+Los Angeles;LAR - DEF,1000
+Untracked36 NE - QB,1000
+Untracked34 NE - QB,1000
+Untracked15 NE - QB,1000
+San Francisco;SF - DEF,1000
+Dallas;Dal - DEF,1000

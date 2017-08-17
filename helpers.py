@@ -85,19 +85,17 @@ def print_players_to_draft(solved_opt, prob_avail):
     for player in ps_to_draft:
         print '\t %s, p=%s' % (player.id, str(prob_avail[player])[:5])
 
-def get_prob_avail_after(players_drafted_between_picks, player_avg_pick, num_drafted, pos_taken, width=1.5):
+def get_prob_avail_after(players_drafted_between_picks, player_avg_pick, next_team_pick, width=1.5):
 
-    threshold = width*players_drafted_between_picks
-    avg_pick_upper_bound = num_drafted + threshold
-    avg_pick_lower_bound = num_drafted - threshold
-
-    if avg_pick_lower_bound == avg_pick_upper_bound:
-        return 1
+    threshold = (width/2.)*players_drafted_between_picks
+    avg_pick_upper_bound = next_team_pick + threshold
+    avg_pick_lower_bound = next_team_pick - threshold
+    print 'upper bound: %s' % avg_pick_upper_bound
+    print 'lower bound: %s' % avg_pick_lower_bound
 
     # If we probably have another pick before player gets taken
-    elif player_avg_pick > avg_pick_upper_bound:
+    if player_avg_pick > avg_pick_upper_bound:
         return 1
-
     # Elif we probably don't have another draft pick before player gets taken
     elif player_avg_pick < avg_pick_lower_bound:
         return 0
@@ -139,7 +137,7 @@ def calc_avg_pick(players):
         for i in range(len(sorted_positions)):
             total_points, player_id = sorted_positions[i]
             rank = i + 1
-            avg_pick = avg_pick_by_rank[position][rank]
+            avg_pick = avg_pick_by_rank[position][rank] if 'Untracked' not in player_id else 1000
             player_avg_pick[player_id] = avg_pick
 
     with open('avg pick-calced.csv', 'wb') as avgpick_output:

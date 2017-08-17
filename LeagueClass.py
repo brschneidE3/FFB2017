@@ -11,9 +11,12 @@ class League:
         self.num_rounds = num_rounds
         self.players = players
 
-    def solve_optimal_model(self, model):
+    def solve_optimal_model(self, model, printon=False):
         opt = pyomo.SolverFactory('cbc')
         opt.solve(model)
+
+        if printon:
+            self.print_points_by_player(model)
         return model
 
     def get_optimal_points(self, solved_opt):
@@ -39,6 +42,7 @@ class League:
         for player, points in sorted_points_by_player:
             print '%s: \n \t %s' % (player, points)
         print 'TOTAL: %s' % sum(points_by_player.values())
+        print 'OBJ VAL: %s\n' % self.get_optimal_points(solved_opt)
 
     def get_position_weeks_by_player(self, solved_opt):
         pos_wks_by_player = {}
