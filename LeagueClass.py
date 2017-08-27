@@ -5,11 +5,20 @@ import operator
 
 class League:
 
-    def __init__(self, num_teams, num_rounds, players):
+    def __init__(self, players):
 
-        self.num_teams = num_teams
-        self.num_rounds = num_rounds
         self.players = players
+
+    def print_num_pos(self):
+        positions = {position: 0 for position in constants.ordered_positions if position != 'B'}
+
+        for player in self.players.values():
+            if 'Untracked' not in player.id:
+                positions[player.position] += 1
+
+        for position in constants.ordered_positions:
+            if position != 'B':
+                print '%s : %s' % (position, positions[position])
 
     def solve_optimal_model(self, model, printon=False):
         opt = pyomo.SolverFactory('cbc')
@@ -19,7 +28,11 @@ class League:
             self.print_points_by_player(model)
         return model
 
-    def get_optimal_points(self, solved_opt):
+    def print_starting(self, solved_opt):
+        for week in pyomo.value(solved_opt.weeks):
+            0
+
+    def get_optimal_points(self, solved_opt=None):
         return pyomo.value(solved_opt.objective)
 
     def get_points_by_player(self, solved_opt):
@@ -85,32 +98,30 @@ class League:
         headers = ['Player'] + constants.ordered_positions
         print tabulate.tabulate(data_table, headers=headers), '\n'
 
-    def create_optimal_model(self, team_playerids, available_playerids, prob_avail_after):
+    def create_optimal_model(self, team_players, available_players, prob_avail_after):
 
         model = pyomo.ConcreteModel()
-        model.weeks = constants.week_weights.keys()
+
+        # Set bounds of problem
+        model.weeks = range(1,14)
         model.positions = constants.roster.keys()
         model.roster_size = sum(constants.roster.values())
 
-        model.team_players = [self.players[id] for id in team_playerids]
-        model.avail_players = [self.players[id] for id in available_playerids]
+        # Determine current and available players
+        model.team_players = team_players
+        model.avail_players = available_players
         model.players = model.team_players + model.avail_players
 
         model.prob_avail_after = {key: prob_avail_after[key] for key in prob_avail_after.keys()}
         for player in model.team_players:
-            if player in model.team_players:
-                model.prob_avail_after[player] = 1.0
+            model.prob_avail_after[player] = 1.0
 
-        # Decision variable for whether player is playing or not
+        ########### Decision Variables ###########
         model.starting = pyomo.Var(model.players, model.positions, model.weeks, within=pyomo.Binary)
-        # Decision variable for whether player is used or not
         model.starts = pyomo.Var(model.players, within=pyomo.NonNegativeIntegers)
         model.used = pyomo.Var(model.players, within=pyomo.Binary)
 
-        # Objective function
-        model.objective = pyomo.Objective(rule=self.objective, sense=pyomo.maximize)
-
-        # Constraints
+        ########### Constraints ###########
         model.position_eligibility = pyomo.Constraint(model.players, model.positions, model.weeks, rule=self.position_eligibility)
         model.weekly_roster_size = pyomo.Constraint(model.positions, model.weeks, rule=self.weekly_roster_size)
         model.only_one_position = pyomo.Constraint(model.players, model.weeks, rule=self.only_one_position)
@@ -118,6 +129,9 @@ class League:
         model.set_used = pyomo.Constraint(model.players, rule=self.set_used)
         model.set_used2 = pyomo.Constraint(model.players, rule=self.set_used2)
         model.cap_used = pyomo.Constraint(model.players, rule=self.cap_used)
+
+        ########### Objective function ###########
+        model.objective = pyomo.Objective(rule=self.objective, sense=pyomo.maximize)
 
         return model
 
@@ -129,10 +143,8 @@ class League:
         for player in model.players:
             player_total = 0
             for position in model.positions:
-                if position != 'B':
-                    for week in model.weeks:
-                        week_weight = constants.week_weights[week]
-                        player_total += player.points[week]*model.starting[player, position, week]*week_weight
+                for week in model.weeks:
+                    player_total += player.points[week]*model.starting[player, position, week]*(position != 'B')
             risk_scalar = model.prob_avail_after[player]
             player_exp_total = player_total * risk_scalar
             obj_total += player_exp_total
@@ -144,7 +156,7 @@ class League:
     def position_eligibility(model, player, position, week):
         if player.position in ['QB', 'RB', 'WR', 'TE', 'K', 'DEF']:
             return model.starting[player, position, week] <= (player.position == position or position == 'B')
-        elif player.position in ['D']:
+        elif player.position == 'D':
             return model.starting[player, position, week] <= (position == 'D' or position == 'B')
         else:
             return model.starting[player, position, week] <= (position in ['D', 'DB', 'B'])
