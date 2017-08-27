@@ -34,6 +34,7 @@ if __name__ == '__main__':
     import operator
     import tabulate
 
+
     pool_start = time.time()
     pool = Pool(processes=8)
 
@@ -45,8 +46,6 @@ if __name__ == '__main__':
     pool.close()
     pool.join()
     pool_end = time.time()
-
-    print '...Pool solving took %s seconds.\n' % round(pool_end - pool_start, 0)
 
     players_and_values = []
     for i in range(len(args_iterable)):
@@ -64,3 +63,4 @@ if __name__ == '__main__':
                                   int(sorted_players_and_values[i - 1][1] - value) if i > 0 else 0,
                                   int(sorted_players_and_values[0][1] - value)])
     print tabulate.tabulate(summary_table,['Player', 'Value', 'd_Value', 'cum_Value'])
+    print '...Pool solving took %s seconds.\n' % round(pool_end - pool_start, 0)
