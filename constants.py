@@ -5,11 +5,10 @@ roster = {'QB': 1,
     'TE': 1,
     'K': 1,
     'DEF': 1,
-    'D': 2,
-    'DB': 1,
-    'B': 5}
+    'B': 6}
 
-ordered_positions = ['QB', 'RB', 'WR', 'TE', 'K', 'DEF', 'D', 'DB', 'B']
+# ordered_positions = ['QB', 'RB', 'WR', 'TE', 'K', 'DEF', 'D', 'DB', 'B']
+ordered_positions = ['QB', 'RB', 'WR', 'TE', 'K', 'DEF', 'B']
 
 week_weights = {1: 1,
                 2: 1,
@@ -23,5 +22,8 @@ week_weights = {1: 1,
                 10: 1,
                 11: 1,
                 12: 1,
-                13: 1}
+                13: 1,
+                14: 0,
+                15: 0,
+                16: 0}
 

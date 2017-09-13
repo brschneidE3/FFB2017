@@ -15,6 +15,19 @@ class Player:
 
         self.avg_pick = avg_pick
 
+    def view_projections(self):
+
+        import tabulate
+
+        header = ['Player']
+        data_row = [self.id]
+
+        for i in range(1, 17):
+            header.append(i)
+            data_row.append(self.points[i])
+
+        print tabulate.tabulate([data_row], header)
+
     def get_position(self):
 
         parse_for_positions = self.id.rsplit(' - ')

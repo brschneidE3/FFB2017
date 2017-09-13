@@ -83,7 +83,7 @@ def get_prob_avail_after(available_players, my_drafted_players, other_drafted_pl
             p_avail = helpers.get_prob_avail_after(players_drafted_between_picks,
                                                    avg_pick,
                                                    next_team_pick,
-                                                   width=0.0)
+                                                   width=1.0)
             prob_avail_after[player] = p_avail
 
             if prob_avail_after[player] < 1:

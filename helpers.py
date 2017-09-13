@@ -75,7 +75,7 @@ def calc_avg_pick(players):
                 rank = int(row[0])
                 for j in range(len(positions)):
                     position = positions[j]
-                    value = float(row[j + 1]) if is_numeric(row[j+1]) else 1000
+                    value = float(row[j + 1]) if is_numeric(row[j+1]) else 100 + rank
                     avg_pick_by_rank[position][rank] = value
 
     players_by_pos = {position: [] for position in constants.ordered_positions if position != 'B'}

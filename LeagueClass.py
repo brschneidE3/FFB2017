@@ -2,12 +2,17 @@ import constants
 from coopr import pyomo
 import tabulate
 import operator
+import PlayerClass
 
 class League:
 
     def __init__(self, players):
 
         self.players = players
+
+    def view_player_projections(self, player=None, player_i=None):
+        player = player if player is not None else self.players.values()[player_i]
+        player.view_projections()
 
     def print_num_pos(self):
         positions = {position: 0 for position in constants.ordered_positions if position != 'B'}
@@ -19,6 +24,31 @@ class League:
         for position in constants.ordered_positions:
             if position != 'B':
                 print '%s : %s' % (position, positions[position])
+
+    def evaluate_trade(self, current_players, give_players, get_players):
+
+        new_players = [player for player in current_players if player not in give_players] + get_players
+
+        current_team_model = \
+            self.create_optimal_model(current_players, [], {player: 1 for player in self.players.values()})
+        solved_current_team = self.solve_optimal_model(current_team_model, printon=True)
+        current_team_value = self.get_optimal_points(solved_current_team)
+
+        print '\n'
+
+        new_team_model = \
+            self.create_optimal_model(new_players, [], {player: 1 for player in self.players.values()})
+        solved_new_team = self.solve_optimal_model(new_team_model, printon=True)
+        new_team_value = self.get_optimal_points(solved_new_team)
+
+        trade_value = new_team_value - current_team_value
+
+        print 'Current team projection: %s' % current_team_value
+        print 'New team projection:     %s' % new_team_value
+        print 'Value of trade:          %s' % trade_value
+
+        return trade_value
+
 
     def solve_optimal_model(self, model, printon=False):
         opt = pyomo.SolverFactory('cbc')
@@ -55,7 +85,6 @@ class League:
         for player, points in sorted_points_by_player:
             print '%s: \n \t %s' % (player, points)
         print 'TOTAL: %s' % sum(points_by_player.values())
-        print 'OBJ VAL: %s\n' % self.get_optimal_points(solved_opt)
 
     def get_position_weeks_by_player(self, solved_opt):
         pos_wks_by_player = {}
@@ -103,12 +132,18 @@ class League:
         model = pyomo.ConcreteModel()
 
         # Set bounds of problem
-        model.weeks = range(1,14)
+        model.weeks = constants.week_weights.keys()
         model.positions = constants.roster.keys()
         model.roster_size = sum(constants.roster.values())
 
+        mcfadden = PlayerClass.Player('D. McFadden Dal - RB')
+        points = {1: 4.74, 2: 11.89, 3: 12.09, 4: 11.99, 5: 12.2, 6: 0, 7: 11.61, 8: 13.25, 9: 3.43, 10: 3.21, 11: 3.44, 12: 3.52,
+                  13: 3.44, 14: 3.27, 15: 3.24, 16: 3.33}
+        mcfadden.add_points(points)
+
+
         # Determine current and available players
-        model.team_players = team_players
+        model.team_players = team_players + [mcfadden]
         model.avail_players = available_players
         model.players = model.team_players + model.avail_players
 
@@ -144,7 +179,7 @@ class League:
             player_total = 0
             for position in model.positions:
                 for week in model.weeks:
-                    player_total += player.points[week]*model.starting[player, position, week]*(position != 'B')
+                    player_total += player.points[week]*model.starting[player, position, week]*(position != 'B')*constants.week_weights[week]
             risk_scalar = model.prob_avail_after[player]
             player_exp_total = player_total * risk_scalar
             obj_total += player_exp_total

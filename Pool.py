@@ -64,3 +64,4 @@ if __name__ == '__main__':
                                   int(sorted_players_and_values[0][1] - value)])
     print tabulate.tabulate(summary_table,['Player', 'Value', 'd_Value', 'cum_Value'])
     print '...Pool solving took %s seconds.\n' % round(pool_end - pool_start, 0)
+
